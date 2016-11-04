@@ -1,5 +1,6 @@
 # Hyke
 Hyke service
+Dev Hosting (when available): http://71.201.21.120/
 
 ## Repositories
 #### Code (GitHub): https://github.com/DoomHawk/Hyke

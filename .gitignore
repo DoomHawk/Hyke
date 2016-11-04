@@ -35,3 +35,11 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+data/test.ns
+data/storage.bson
+data/test.0
+*.ns
+data/mongod.lock
+data/diagnostic.data/metrics.2016-11-04T04-13-15Z-00000
+*.0
+data/diagnostic.data/metrics.2016-11-04T05-09-33Z-00000
