@@ -1,0 +1,39 @@
+{
+  "name": "hyke",
+  "version": "0.0.1",
+  "description": "A cloud, REST API based web app/service for connecting drivers and riders for long distance ride sharing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/DoomHawk/Hyke.git"
+  },
+  "author": "Robert T Ivaniszyn II",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/DoomHawk/Hyke/issues"
+  },
+  "dependencies": {
+    "angularjs": "0.0.1",
+    "mongodb": "~2.2.11",
+    "mongoose": "~4.6.6",
+    "express": "~4.14.0",
+    "body-parser": "~1.15.2",
+    "passport": "~0.3.2",
+    "angular-route": "~1.5.8",
+    "bootstrap": "~3.3.7",
+    "passport-facebook": "~2.1.1",
+    "serve-favicon": "~2.3.0",
+    "express-session": "~1.14.2",
+    "connect-flash": "~0.1.1",
+    "consolidate": "~0.14.1",
+    "morgan": "~1.7.0",
+    "cookie-parser": "~1.4.3",
+    "passport-local": "~1.0.0",
+    "bcrypt-nodejs": "0.0.3",
+    "jquery": "~3.1.1",
+    "angular": "~1.5.8"
+  }
+}
