@@ -74,7 +74,7 @@ var serverInit = function(next) {
 	console.log("Hyke Server Initializing...\n");
 
 	console.log("Loading configuration from DB...\n");
-	getDBConfigs(function(result) {
+	dbQueries.getDBConfigs(function(result) {
 		if (result['_id'] === null) {
 			self.server.configs = result;
 		};
@@ -116,7 +116,7 @@ var serverInit = function(next) {
 		// routes ======================================================================
 		require('./app/routes.js')(app, express, passport);
 		// load our routes and pass in our app and fully configured passport
-		
+
 		console.log('Hyke Server init complete!');
 		console.log('--------------------------------------------------\n');
 		next();
@@ -132,6 +132,34 @@ var serverStart = function(next) {
 	// launch ======================================================================
 	app.listen(port);
 	next();
+};
+
+var dbQueries = {
+	getDBConfigs : function(callback) {
+		//Load the schema locally for ease of use
+		var configSchemas = self.server.schema.configSchemas;
+
+		//Create a local instance of the schema
+		var sessionConfigSchema = configSchemas.sessionConfigSchema;
+
+		if (self.server.state.dev)
+			dev.printSchema(sessionConfigSchema, "sessionConfigSchema");
+
+		sessionConfigSchema.findOne().sort({
+			'_id' : -1
+		}).lean().exec(function(error, returnData) {
+
+			if (error) {
+				console.log("Error getting session config data: " + error);
+				callback(error);
+			} else {
+				if (self.server.state.dev)
+					dev.printReturnData(error, returnData);
+				callback(returnData);
+			};
+
+		});
+	},
 };
 
 var getDBConfigs = function(callback) {
@@ -159,7 +187,6 @@ var getDBConfigs = function(callback) {
 
 	});
 };
-
 
 serverInit(function() {
 	serverStart(function() {

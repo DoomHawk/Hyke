@@ -55,10 +55,46 @@
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
 					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<a class="page-scroll" href="#download">Download</a>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="http://example.com" id="supportedContentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+							<div class="dropdown-menu" aria-labelledby="supportedContentDropdown" style='padding: 2em'>
+								<form action="/api/login/local" method="post" style='min-width: 20em'>
+								<div class="form-group">
+									<label>Email</label>
+									<input type="text" class="form-control" name="email">
+								</div>
+								<div class="form-group">
+									<label>Password</label>
+									<input type="password" class="form-control" name="password">
+								</div>
+
+								<button type="submit" class="btn btn-warning btn-lg">
+									Login
+								</button>
+							</form>
+							</div>
 						</li>
+						<!--<li>
+							<form class="form-inline float-xs-right" action="/api/login/local" method="post">
+								<div class="form-group">
+									<a>Email</a>
+									<input type="text" class="form-control" name="email">
+								</div>
+								<div class="form-group">
+									<a>Password</a>
+									<input type="password" class="form-control" name="password">
+								</div>
+
+								<button type="submit" class="btn btn-warning btn-lg">
+									Login
+								</button>
+							</form>
+						</li>
+						<li>
+							<a class="page-scroll" href="/login">Login</a>
+						</li>-->
 						<li>
 							<a class="page-scroll" href="#features">Features</a>
 						</li>

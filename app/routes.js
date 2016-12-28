@@ -12,7 +12,7 @@ module.exports = function(app, express, passport) {
 	app.get('/api/login', function(req, res) {
 
 		// render the page and pass in any flash data if it exists
-		console.log(util.inspect(req.flash));
+		//console.log('/api/login/' + util.inspect(req.flash));
 		res.json({
 			message : req.flash('loginMessage')
 		});
@@ -64,7 +64,29 @@ module.exports = function(app, express, passport) {
 		res.end();
 		//res.redirect('/home');
 	});
+	
+	app.get('/login', function(req, res) {
+		console.log('Login page requestd');
+		getPagePublic(req, res, "login.html");
+	});
+	
+	app.get('/home', function(req, res) {
+		console.log('Home page requestd');
+		getPagePublic(req, res, "home.html");
+	});
+	
+	app.get('/profile', function(req, res) {
+		console.log('Home page requestd');
+		getPagePrivate(req, res, "profile.html");
+	});
+	
+	app.get('/', function(req, res) {
+		console.log('Home page requestd');
+		getIndex(req, res, 'public');
+	});
 
+
+/*
 	app.get('/private/profile', isLoggedIn, function(req, res) {
 		if (req.headers.referer) {
 			var options = {
@@ -144,17 +166,59 @@ module.exports = function(app, express, passport) {
 		};
 	});
 	
-	/*app.get('/logout', function(req, res) {
+	
+	
+	app.get('/logout', function(req, res) {
 		res.redirect('/');
-	});*/
+	});
 	app.get('/', function(req, res) {
 		callIndex(req, res, (__dirname + '/../public/'));
-	});
+	});*/
 };
 
-function callIndex(req, res, root, next) {
+function getPagePublic(req, res, fileName) {
 	var options = {
-		root : root,
+				root : __dirname + '/../public/pages/',
+				dotfiles : 'deny',
+				headers : {
+					'x-timestamp' : Date.now(),
+					'x-sent' : true
+				},
+			};
+			res.sendFile(fileName, options, function(err) {
+				if (err) {
+					console.log("error");
+					console.log(err);
+					res.status(err.status).end();
+				} else {
+					console.log('Sent:', fileName);
+				}
+			});
+};
+
+function getPagePrivate(req, res, fileName) {
+	var options = {
+				root : __dirname + '/../private/pages/',
+				dotfiles : 'deny',
+				headers : {
+					'x-timestamp' : Date.now(),
+					'x-sent' : true
+				},
+			};
+			res.sendFile(fileName, options, function(err) {
+				if (err) {
+					console.log("error");
+					console.log(err);
+					res.status(err.status).end();
+				} else {
+					console.log('Sent:', fileName);
+				}
+			});
+};
+
+function getIndex(req, res, pathEndpoint) {
+	var options = {
+		root : __dirname + '/../' + pathEndpoint,
 		dotfiles : 'deny',
 		headers : {
 			'x-timestamp' : Date.now(),
